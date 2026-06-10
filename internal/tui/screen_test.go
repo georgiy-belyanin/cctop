@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"cctop/internal/instance"
+	"github.com/georgiy-belyanin/cctop/internal/instance"
 )
 
 var renderTime = time.Date(2026, 6, 10, 15, 0, 0, 0, time.UTC)

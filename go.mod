@@ -1,4 +1,4 @@
-module cctop
+module github.com/georgiy-belyanin/cctop
 
 go 1.26
 

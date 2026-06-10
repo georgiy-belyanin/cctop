@@ -10,7 +10,7 @@ import (
 
 	"golang.org/x/term"
 
-	"cctop/internal/instance"
+	"github.com/georgiy-belyanin/cctop/internal/instance"
 )
 
 // emit writes straight to the terminal; a failed write to our own TTY has

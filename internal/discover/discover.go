@@ -16,7 +16,7 @@ import (
 	"sync"
 	"time"
 
-	"cctop/internal/instance"
+	"github.com/georgiy-belyanin/cctop/internal/instance"
 )
 
 // sessionFile mirrors ~/.claude/sessions/<PID>.json (Claude Code v2.1.x).

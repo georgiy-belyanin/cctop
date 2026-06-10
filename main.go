@@ -11,9 +11,9 @@ import (
 
 	"golang.org/x/term"
 
-	"cctop/internal/discover"
-	"cctop/internal/instance"
-	"cctop/internal/tui"
+	"github.com/georgiy-belyanin/cctop/internal/discover"
+	"github.com/georgiy-belyanin/cctop/internal/instance"
+	"github.com/georgiy-belyanin/cctop/internal/tui"
 )
 
 func main() {
