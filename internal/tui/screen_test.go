@@ -61,7 +61,9 @@ func TestTableNarrowWidthDoesNotPanic(t *testing.T) {
 		CWD: "/a/very/long/path/that/will/surely/not/fit/anywhere/at/all",
 	}}
 	for _, w := range []int{0, 1, 20, 60} {
-		_ = Table(list, Options{Width: w, Color: true, Now: renderTime})
+		if lines := Table(list, Options{Width: w, Color: true, Now: renderTime}); len(lines) == 0 {
+			t.Errorf("width %d: no output", w)
+		}
 	}
 }
 

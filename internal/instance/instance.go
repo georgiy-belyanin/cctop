@@ -10,6 +10,7 @@ import (
 // Status is the user-facing state of an instance.
 type Status string
 
+// The four user-facing states, from calm to urgent.
 const (
 	Idle  Status = "idle"
 	Auto  Status = "auto" // agent is actively working (registry: busy/shell)
