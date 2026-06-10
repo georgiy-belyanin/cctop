@@ -161,6 +161,16 @@ are reserved for whole-class decisions (e.g. errcheck in tests).
   flips idle↔auto as you submit prompts, and disappears (or goes red) when the
   process exits.
 
+## Commits
+
+Every commit must be atomic: one self-contained change that builds, passes
+`make ci`, and leaves the tool working on its own. `git bisect` across any
+range of history must work perfectly — never split a feature so that an
+intermediate commit is broken, and never bundle unrelated changes that would
+blur which commit introduced a regression. If a change only makes sense
+together with its tests, they go in the same commit. Squash fixups before
+merging; "fix lint", "oops" commits must not reach main.
+
 ## Style
 
 - Plain Go, no cleverness: small packages, exported types documented, errors
