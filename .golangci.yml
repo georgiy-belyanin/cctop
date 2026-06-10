@@ -1,0 +1,25 @@
+version: "2"
+
+linters:
+  # standard = errcheck, govet, ineffassign, staticcheck, unused
+  default: standard
+  enable:
+    - gocritic
+    - misspell
+    - revive
+    - unconvert
+  exclusions:
+    rules:
+      # Test helpers may ignore errors freely.
+      - path: _test\.go
+        linters:
+          - errcheck
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - cctop

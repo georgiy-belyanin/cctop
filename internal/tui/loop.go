@@ -13,6 +13,12 @@ import (
 	"cctop/internal/instance"
 )
 
+// emit writes straight to the terminal; a failed write to our own TTY has
+// no useful recovery, so the error is deliberately dropped.
+func emit(s string) {
+	_, _ = os.Stdout.WriteString(s)
+}
+
 // Run owns the terminal: raw mode, alternate screen, hidden cursor — all
 // restored on every exit path, including signals. scan is called once per
 // tick; its result is sorted and repainted in full (no diffing).
@@ -23,10 +29,10 @@ func Run(scan func() ([]instance.Instance, error), interval time.Duration) error
 		return fmt.Errorf("enter raw mode: %w", err)
 	}
 	defer func() {
-		fmt.Fprint(os.Stdout, "\x1b[?25h\x1b[?1049l") // cursor on, main screen
+		emit("\x1b[?25h\x1b[?1049l") // cursor on, main screen
 		_ = term.Restore(in, oldState)
 	}()
-	fmt.Fprint(os.Stdout, "\x1b[?1049h\x1b[?25l\x1b[2J") // alt screen, cursor off, clear
+	emit("\x1b[?1049h\x1b[?25l\x1b[2J") // alt screen, cursor off, clear
 
 	keys := make(chan byte, 8)
 	go func() {
@@ -70,7 +76,7 @@ func Run(scan func() ([]instance.Instance, error), interval time.Duration) error
 			b.WriteString(red + "scan error: " + scanErr.Error() + reset + "\x1b[K\r\n")
 		}
 		b.WriteString("\x1b[J") // clear leftovers from a taller previous frame
-		fmt.Fprint(os.Stdout, b.String())
+		emit(b.String())
 	}
 
 	draw()

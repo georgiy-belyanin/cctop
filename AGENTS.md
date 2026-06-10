@@ -138,11 +138,20 @@ cctop/
 ## Development
 
 ```sh
-go build ./...                 # must stay warning-free
-go vet ./...
-go test ./...
-GOOS=linux go build ./...      # cross-compile check from macOS — run in CI for both
+make build                     # go build -o cctop .
+make test
+make lint                      # golangci-lint v2 (config: .golangci.yml)
+make fmt                       # golangci-lint fmt (gofmt + goimports)
+make ci                        # vet + lint + test + build — run before pushing
+GOOS=linux go build ./...      # cross-compile check from macOS
 ```
+
+CI (`.github/workflows/ci.yml`) runs format check + golangci-lint, then
+test/build on both ubuntu and macos runners, uploading the binaries as
+artifacts. Tags matching `v*` trigger `.github/workflows/release.yml`, which
+cross-compiles linux/darwin × amd64/arm64 and publishes a GitHub release.
+Lint findings are fixed in code, not silenced — `.golangci.yml` exclusions
+are reserved for whole-class decisions (e.g. errcheck in tests).
 
 - Tests for `discover` must not touch the real `~/.claude` — the scanner takes a
   root dir parameter; fixtures live in `testdata/` (copy the JSON shapes from the

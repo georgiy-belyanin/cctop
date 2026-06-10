@@ -45,6 +45,7 @@ type Scanner struct {
 	transcripts map[string]*transcriptCache
 }
 
+// New returns a Scanner over the given Claude Code data directory.
 func New(root string) *Scanner {
 	return &Scanner{Root: root, transcripts: make(map[string]*transcriptCache)}
 }

@@ -66,7 +66,7 @@ func lastModel(path string, size int64) string {
 	if err != nil {
 		return ""
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }() // read-only; close error is meaningless
 
 	off := int64(0)
 	if size > tailWindow {
