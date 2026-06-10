@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"cctop/internal/instance"
+	"github.com/georgiy-belyanin/cctop/internal/instance"
 )
 
 const (

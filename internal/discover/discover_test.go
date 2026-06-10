@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"cctop/internal/instance"
+	"github.com/georgiy-belyanin/cctop/internal/instance"
 )
 
 func TestMapStatus(t *testing.T) {
